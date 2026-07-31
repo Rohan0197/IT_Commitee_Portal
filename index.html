@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IIM Bodh Gaya | IT Committee</title>
+  <meta name="description" content="Official portal of the IT Committee, IIM Bodh Gaya - events, team and registrations." />
+  <link rel="icon" href="assets/logo-badge.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ── Navbar (same markup repeated on every page - there's no
+       templating in plain HTML, so each page just keeps its own copy) ── -->
+  <header class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="brand">
+        <img src="assets/logo-badge.png" alt="IT Committee logo" />
+        <img src="assets/logo-iimbg.png" alt="IIM Bodh Gaya logo" class="brand-iimbg-logo" />
+        <span class="brand-text">IIM Bodh Gaya<small>IT Committee</small></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="pages/events.html">Events</a>
+        <a href="pages/team.html">Team</a>
+        <a href="admin/index.html">Admin</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="nav-mobile" id="navMobile">
+      <a href="index.html">Home</a>
+      <a href="pages/events.html">Events</a>
+      <a href="pages/team.html">Team</a>
+      <a href="admin/index.html">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">IIM Bodh Gaya</p>
+      <h1>IT Committee Portal</h1>
+      <p class="subtitle">
+        Discover upcoming technical, cultural and professional development events, meet the
+        committee, and register for what interests you - all in one place.
+      </p>
+      <div class="hero-buttons">
+        <a href="pages/events.html" class="btn btn-gold">Browse events</a>
+        <a href="pages/team.html" class="btn btn-outline-light">Meet the team</a>
+      </div>
+    </section>
+
+    <section class="highlights">
+      <div class="container highlight-grid">
+        <div class="card">
+          <h2>Events</h2>
+          <p>Browse workshops, competitions and guest sessions run by the committee, and register in seconds.</p>
+          <a href="pages/events.html" class="card-link">See events &rarr;</a>
+        </div>
+        <div class="card">
+          <h2>Team</h2>
+          <p>Meet the students behind the IT Committee's platforms, outreach and on-ground execution.</p>
+          <a href="pages/team.html" class="card-link">Meet the team &rarr;</a>
+        </div>
+        <div class="card">
+          <h2>Admin</h2>
+          <p>Committee members can sign in to publish new events and manage the calendar in real time.</p>
+          <a href="admin/index.html" class="card-link">Admin sign in &rarr;</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <img src="assets/logo-badge.png" alt="IT Committee logo" />
+    <p class="footer-title">IIM Bodh Gaya &mdash; IT Committee</p>
+    <p>Sabbe Bhadrani Passantu</p>
+    <p class="footer-copyright">&copy; <span id="year"></span> IT Committee, IIM Bodh Gaya. All rights reserved.</p>
+  </footer>
+
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  <script src="js/nav.js"></script>
+</body>
+</html>

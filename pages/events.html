@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events | IIM Bodh Gaya IT Committee</title>
+  <link rel="icon" href="../assets/logo-badge.png" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="navbar-inner">
+      <a href="../index.html" class="brand">
+        <img src="../assets/logo-badge.png" alt="IT Committee logo" />
+        <img src="../assets/logo-iimbg.png" alt="IIM Bodh Gaya logo" class="brand-iimbg-logo" />
+        <span class="brand-text">IIM Bodh Gaya<small>IT Committee</small></span>
+      </a>
+      <nav class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="events.html">Events</a>
+        <a href="team.html">Team</a>
+        <a href="../admin/index.html">Admin</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="nav-mobile" id="navMobile">
+      <a href="../index.html">Home</a>
+      <a href="events.html">Events</a>
+      <a href="team.html">Team</a>
+      <a href="../admin/index.html">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-header container">
+      <h1>Upcoming Events</h1>
+      <p>Filter by category or search by name to find what you're looking for.</p>
+    </div>
+
+    <div class="filter-bar container">
+      <input type="search" id="searchInput" placeholder="Search events by name..." aria-label="Search events by name" />
+      <select id="categoryFilter" aria-label="Filter events by category">
+        <option value="All">All categories</option>
+        <!-- options for EVENT_CATEGORIES are added by js/events.js -->
+      </select>
+    </div>
+
+    <div id="eventsStatus" class="container"></div>
+    <div id="eventsGrid" class="grid grid-events container"></div>
+  </main>
+
+  <!-- Registration modal - hidden until a "Register" button is clicked -->
+  <div class="modal-backdrop hidden" id="registrationModal">
+    <div class="modal">
+      <div class="modal-top">
+        <div>
+          <h2 id="regEventTitle">Register</h2>
+          <p id="regEventMeta" style="margin:0;font-size:0.8rem;color:var(--color-text-muted);"></p>
+        </div>
+        <button class="modal-close" id="closeRegistrationModal" aria-label="Close">&#10005;</button>
+      </div>
+
+      <div id="registrationSuccess" style="display:none;">
+        <div class="notice notice-success">
+          You're registered! A confirmation has been recorded.
+          <button class="btn btn-navy btn-small" id="registrationDoneBtn" style="display:block;width:100%;margin-top:0.75rem;">Done</button>
+        </div>
+      </div>
+
+      <form id="registrationForm">
+        <div class="field">
+          <label for="regName">Full name</label>
+          <input type="text" id="regName" />
+          <p class="error" id="regNameError"></p>
+        </div>
+        <div class="field">
+          <label for="regEmail">Email</label>
+          <input type="email" id="regEmail" />
+          <p class="error" id="regEmailError"></p>
+        </div>
+        <div class="field">
+          <label for="regPhone">Phone number</label>
+          <input type="tel" id="regPhone" />
+          <p class="error" id="regPhoneError"></p>
+        </div>
+        <div class="field">
+          <label for="regRoll">Roll number</label>
+          <input type="text" id="regRoll" />
+          <p class="error" id="regRollError"></p>
+        </div>
+        <div id="registrationFormError"></div>
+        <button type="submit" class="btn btn-navy" style="width:100%;" id="registrationSubmitBtn">Submit registration</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <img src="../assets/logo-badge.png" alt="IT Committee logo" />
+    <p class="footer-title">IIM Bodh Gaya &mdash; IT Committee</p>
+    <p>Sabbe Bhadrani Passantu</p>
+    <p class="footer-copyright">&copy; <span id="year"></span> IT Committee, IIM Bodh Gaya. All rights reserved.</p>
+  </footer>
+
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  <script src="../js/nav.js"></script>
+
+  <!-- Firebase compat SDK, loaded from Google's CDN - "compat" means it
+       works with plain <script> tags instead of needing a bundler/import. -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="../js/firebase-config.js"></script>
+  <script src="../js/categories.js"></script>
+  <script src="../js/validation.js"></script>
+  <script src="../js/events.js"></script>
+</body>
+</html>

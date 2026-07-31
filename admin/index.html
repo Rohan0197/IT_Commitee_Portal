@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin | IIM Bodh Gaya IT Committee</title>
+  <link rel="icon" href="../assets/logo-badge.png" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="navbar-inner">
+      <a href="../index.html" class="brand">
+        <img src="../assets/logo-badge.png" alt="IT Committee logo" />
+        <img src="../assets/logo-iimbg.png" alt="IIM Bodh Gaya logo" class="brand-iimbg-logo" />
+        <span class="brand-text">IIM Bodh Gaya<small>IT Committee</small></span>
+      </a>
+      <nav class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../pages/events.html">Events</a>
+        <a href="../pages/team.html">Team</a>
+        <a href="index.html">Admin</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="nav-mobile" id="navMobile">
+      <a href="../index.html">Home</a>
+      <a href="../pages/events.html">Events</a>
+      <a href="../pages/team.html">Team</a>
+      <a href="index.html">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Shown when Firebase hasn't been configured yet -->
+    <div id="notConfiguredScreen" class="container" style="display:none;padding-top:2.5rem;">
+      <div class="notice notice-warning" style="max-width:520px;margin:2.5rem auto;">
+        Firebase isn't configured yet. Add your project keys to <code>js/firebase-config.js</code> and enable
+        Email/Password authentication to use the admin panel.
+      </div>
+    </div>
+
+    <!-- Shown while Firebase Auth is checking whether someone is already logged in -->
+    <p id="checkingScreen" class="center-note" style="display:none;">Checking session...</p>
+
+    <!-- Shown when nobody is logged in -->
+    <div id="loginScreen" style="display:none;">
+      <div class="login-wrap">
+        <h1>Admin sign in</h1>
+        <p>Sign in with your committee admin account to manage events.</p>
+
+        <form id="loginForm">
+          <div class="field">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" required />
+          </div>
+          <div class="field">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" required />
+          </div>
+          <div id="loginError"></div>
+          <button type="submit" class="btn btn-navy" style="width:100%;" id="loginSubmitBtn">Sign in</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Shown once a login is confirmed -->
+    <div id="dashboardScreen" style="display:none;">
+      <div class="admin-topbar">
+        <div>
+          <h1 style="margin:0;font-size:1.1rem;">Admin dashboard</h1>
+          <p class="who" id="signedInAs"></p>
+        </div>
+        <div class="admin-actions">
+          <button class="btn btn-gold" id="addEventBtn">Add event</button>
+          <button class="btn btn-outline-light" id="signOutBtn" style="border-color:rgba(255,255,255,0.4);">Sign out</button>
+        </div>
+      </div>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Date</th>
+              <th>Venue</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="eventsTableBody"></tbody>
+        </table>
+      </div>
+      <p id="noEventsNote" class="empty-state" style="display:none;margin:0 1rem;">No events yet. Add your first event above.</p>
+    </div>
+  </main>
+
+  <!-- Add / edit event modal - same form used for both, toggled by js/admin.js -->
+  <div class="modal-backdrop hidden" id="eventFormModal">
+    <div class="modal">
+      <div class="modal-top">
+        <h2 id="eventFormTitle">Add event</h2>
+        <button class="modal-close" id="closeEventFormModal" aria-label="Close">&#10005;</button>
+      </div>
+
+      <form id="eventForm">
+        <input type="hidden" id="eventId" />
+
+        <div class="field">
+          <label for="eventTitle">Title</label>
+          <input type="text" id="eventTitle" />
+          <p class="error" id="eventTitleError"></p>
+        </div>
+
+        <div class="field">
+          <label for="eventDescription">Description</label>
+          <textarea id="eventDescription" rows="3"></textarea>
+          <p class="error" id="eventDescriptionError"></p>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="eventCategory">Category</label>
+            <select id="eventCategory"></select>
+          </div>
+          <div class="field">
+            <label for="eventCapacity">Capacity</label>
+            <input type="number" id="eventCapacity" min="1" />
+            <p class="error" id="eventCapacityError"></p>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="eventDate">Date</label>
+            <input type="date" id="eventDate" />
+            <p class="error" id="eventDateError"></p>
+          </div>
+          <div class="field">
+            <label for="eventTime">Time</label>
+            <input type="text" id="eventTime" placeholder="5:00 PM" />
+            <p class="error" id="eventTimeError"></p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="eventVenue">Venue</label>
+          <input type="text" id="eventVenue" />
+          <p class="error" id="eventVenueError"></p>
+        </div>
+
+        <div id="eventFormError"></div>
+
+        <div style="display:flex;gap:0.75rem;margin-top:0.5rem;">
+          <button type="button" class="btn btn-secondary" style="flex:1;" id="cancelEventFormBtn">Cancel</button>
+          <button type="submit" class="btn btn-navy" style="flex:1;" id="eventFormSubmitBtn">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <img src="../assets/logo-badge.png" alt="IT Committee logo" />
+    <p class="footer-title">IIM Bodh Gaya &mdash; IT Committee</p>
+    <p>Sabbe Bhadrani Passantu</p>
+    <p class="footer-copyright">&copy; <span id="year"></span> IT Committee, IIM Bodh Gaya. All rights reserved.</p>
+  </footer>
+
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  <script src="../js/nav.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="../js/firebase-config.js"></script>
+  <script src="../js/categories.js"></script>
+  <script src="../js/validation.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

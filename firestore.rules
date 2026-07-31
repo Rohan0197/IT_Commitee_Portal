@@ -1,0 +1,19 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Events: anyone can read; only signed-in admins can create/edit/delete.
+    match /events/{eventId} {
+      allow read: if true;
+      allow create, update, delete: if request.auth != null;
+    }
+
+    // Registrations: anyone can submit a registration, but only admins can
+    // read, edit or delete the collected data.
+    match /registrations/{registrationId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+  }
+}

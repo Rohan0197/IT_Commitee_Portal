@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team | IIM Bodh Gaya IT Committee</title>
+  <link rel="icon" href="../assets/logo-badge.png" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="navbar-inner">
+      <a href="../index.html" class="brand">
+        <img src="../assets/logo-badge.png" alt="IT Committee logo" />
+        <img src="../assets/logo-iimbg.png" alt="IIM Bodh Gaya logo" class="brand-iimbg-logo" />
+        <span class="brand-text">IIM Bodh Gaya<small>IT Committee</small></span>
+      </a>
+      <nav class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="events.html">Events</a>
+        <a href="team.html">Team</a>
+        <a href="../admin/index.html">Admin</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="nav-mobile" id="navMobile">
+      <a href="../index.html">Home</a>
+      <a href="events.html">Events</a>
+      <a href="team.html">Team</a>
+      <a href="../admin/index.html">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-header container">
+      <h1>Our Team</h1>
+      <p>The students who plan, build and run everything the IT Committee delivers.</p>
+    </div>
+
+    <div id="teamGrid" class="grid grid-team container"></div>
+  </main>
+
+  <footer class="footer">
+    <img src="../assets/logo-badge.png" alt="IT Committee logo" />
+    <p class="footer-title">IIM Bodh Gaya &mdash; IT Committee</p>
+    <p>Sabbe Bhadrani Passantu</p>
+    <p class="footer-copyright">&copy; <span id="year"></span> IT Committee, IIM Bodh Gaya. All rights reserved.</p>
+  </footer>
+
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/team-data.js"></script>
+  <script src="../js/team.js"></script>
+</body>
+</html>
