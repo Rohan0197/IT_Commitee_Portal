@@ -16,7 +16,7 @@
    ============================================================ */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyArgEikCe8tL_KuCyPDEYnubf98cOwDl3c",
+  apiKey: "AIzaSyArgEikCe8tL_KuCyPDEYnubf98c0wDl3c",
   authDomain: "it-commitee.firebaseapp.com",
   projectId: "it-commitee",
   storageBucket: "it-commitee.firebasestorage.app",
