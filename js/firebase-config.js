@@ -16,12 +16,12 @@
    ============================================================ */
 
 const firebaseConfig = {
-  apiKey: "",
-  authDomain: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: "",
+  apiKey: "AIzaSyArgEikCe8tL_KuCyPDEYnubf98cOwDl3c",
+  authDomain: "it-commitee.firebaseapp.com",
+  projectId: "it-commitee",
+  storageBucket: "it-commitee.firebasestorage.app",
+  messagingSenderId: "396016913571",
+  appId: "1:396016913571:web:475e4d103ff7b8190a8316",
 };
 
 // If apiKey is still blank, the config hasn't been filled in yet.
