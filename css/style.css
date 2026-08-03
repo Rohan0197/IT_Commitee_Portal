@@ -14,6 +14,10 @@
   --color-text-muted: #4b4880;
   --color-border: rgba(30, 27, 75, 0.12);
   --max-width: 1120px;
+  --shadow-sm: 0 1px 2px rgba(30, 27, 75, 0.05);
+  --shadow-md: 0 8px 24px rgba(30, 27, 75, 0.08);
+  --shadow-lg: 0 16px 40px rgba(30, 27, 75, 0.14);
+  --font-heading: "Poppins", "Segoe UI", system-ui, sans-serif;
 }
 
 * {
@@ -38,6 +42,28 @@ a {
   color: inherit;
 }
 
+h1, h2, h3 {
+  font-family: var(--font-heading);
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-navy);
+}
+
+a, button {
+  transition: all 0.15s ease;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -50,7 +76,9 @@ a {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -72,8 +100,8 @@ a {
 }
 
 .brand img {
-  height: 36px;
-  width: 36px;
+  height: 46px;
+  width: 46px;
 }
 
 .brand .brand-iimbg-logo {
@@ -82,6 +110,7 @@ a {
 }
 
 .brand-text {
+  font-family: var(--font-heading);
   font-size: 0.9rem;
   font-weight: 600;
   line-height: 1.2;
@@ -100,14 +129,31 @@ a {
 }
 
 .nav-links a {
+  position: relative;
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
   color: rgba(30, 27, 75, 0.8);
+  padding-bottom: 4px;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-gold);
+  transition: width 0.2s ease;
 }
 
 .nav-links a:hover {
-  color: var(--color-gold);
+  color: var(--color-navy);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
 }
 
 .nav-toggle {
@@ -121,6 +167,10 @@ a {
   border-radius: 6px;
   background: none;
   cursor: pointer;
+}
+
+.nav-toggle:hover {
+  background: rgba(30, 27, 75, 0.05);
 }
 
 .nav-toggle span {
@@ -199,10 +249,31 @@ a {
 /* ── Hero (home page) ── */
 
 .hero {
-  background: var(--color-navy);
+  position: relative;
+  background: radial-gradient(circle at 20% 20%, #2e2a6b 0%, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(232, 168, 60, 0.18) 0%, transparent 40%),
+    linear-gradient(160deg, var(--color-navy) 0%, #171442 100%);
   text-align: center;
-  padding: 4rem 1rem;
+  padding: 4.5rem 1rem;
   color: #fff;
+  overflow: hidden;
+}
+
+/* Faint dot-grid overlay for texture - very low opacity so it reads as
+   depth, not a distracting pattern. Sits behind the text via z-index. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
 }
 
 .hero p.eyebrow {
@@ -215,8 +286,11 @@ a {
 }
 
 .hero h1 {
+  font-family: var(--font-heading);
+  font-weight: 600;
   font-size: 2rem;
   margin: 0.75rem 0;
+  letter-spacing: -0.01em;
 }
 
 .hero p.subtitle {
@@ -245,22 +319,29 @@ a {
 
 .btn {
   display: inline-block;
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 0.75rem 1.5rem;
   font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none;
   border: none;
   cursor: pointer;
+  transition: transform 250ms ease, box-shadow 250ms ease, background 250ms ease;
+}
+
+.btn:not(:disabled):hover {
+  transform: translateY(-2px);
 }
 
 .btn-gold {
   background: var(--color-gold);
   color: var(--color-navy);
+  box-shadow: 0 4px 14px rgba(232, 168, 60, 0.35);
 }
 
 .btn-gold:hover {
   background: var(--color-gold-light);
+  box-shadow: 0 6px 18px rgba(232, 168, 60, 0.45);
 }
 
 .btn-outline-light {
@@ -276,10 +357,12 @@ a {
 .btn-navy {
   background: var(--color-navy);
   color: #fff;
+  box-shadow: 0 4px 14px rgba(30, 27, 75, 0.25);
 }
 
 .btn-navy:hover {
   background: var(--color-navy-light);
+  box-shadow: 0 6px 18px rgba(30, 27, 75, 0.32);
 }
 
 .btn-secondary {
@@ -295,6 +378,10 @@ a {
 .btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+  transform: none;
 }
 
 /* ── Highlight cards on home page ── */
@@ -318,9 +405,28 @@ a {
 .card {
   background: #fff;
   border: 1px solid var(--color-border);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 1.5rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(232, 168, 60, 0.4);
+}
+
+.card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(232, 168, 60, 0.12);
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
 }
 
 .card h2,
@@ -374,14 +480,39 @@ a {
 
 .filter-bar input,
 .filter-bar select {
-  padding: 0.5rem 0.75rem;
+  padding: 0.6rem 0.9rem;
   border: 1px solid var(--color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 0.9rem;
+  background: #fff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.filter-bar input {
+.filter-bar input:focus,
+.filter-bar select:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(232, 168, 60, 0.15);
+}
+
+.search-wrap {
+  position: relative;
   flex: 1;
+}
+
+.search-wrap input {
+  width: 100%;
+  padding-left: 2.25rem;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  pointer-events: none;
+  opacity: 0.6;
 }
 
 /* ── Event / team grids ── */
@@ -402,6 +533,7 @@ a {
 @media (min-width: 1024px) {
   .grid.grid-events {
     grid-template-columns: repeat(3, 1fr);
+    row-gap: 1.875rem;
   }
   .grid.grid-team {
     grid-template-columns: repeat(4, 1fr);
@@ -411,10 +543,17 @@ a {
 .event-card {
   background: #fff;
   border: 1px solid var(--color-border);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
 
 .event-card-top {
@@ -433,9 +572,11 @@ a {
 .badge {
   flex-shrink: 0;
   border-radius: 999px;
-  padding: 0.25rem 0.6rem;
-  font-size: 0.7rem;
-  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
   background: rgba(30, 27, 75, 0.08);
   color: var(--color-navy);
 }
@@ -454,11 +595,17 @@ a {
 
 .event-meta div {
   display: flex;
+  align-items: center;
   gap: 0.4rem;
 }
 
-.event-meta strong {
-  color: var(--color-navy);
+.event-meta div + div {
+  margin-top: 0.3rem;
+}
+
+.meta-icon {
+  font-size: 0.9rem;
+  line-height: 1;
 }
 
 .empty-state {
@@ -500,9 +647,16 @@ a {
 .team-card {
   background: #fff;
   border: 1px solid var(--color-border);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 1.5rem;
   text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
 
 .avatar {
@@ -515,7 +669,9 @@ a {
   justify-content: center;
   color: #fff;
   font-weight: 600;
+  font-family: var(--font-heading);
   font-size: 1.1rem;
+  box-shadow: 0 0 0 4px #fff, 0 0 0 5px var(--color-border);
 }
 
 .team-card h3 {
@@ -555,11 +711,20 @@ a {
 .field select,
 .field textarea {
   width: 100%;
-  padding: 0.55rem 0.7rem;
+  padding: 0.6rem 0.75rem;
   border: 1px solid var(--color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 0.9rem;
   font-family: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(232, 168, 60, 0.15);
 }
 
 .field .error {
@@ -594,10 +759,11 @@ a {
 
 .modal {
   background: #fff;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 1.5rem;
   width: 100%;
   max-width: 440px;
+  box-shadow: var(--shadow-lg);
 }
 
 .modal-top {
@@ -619,6 +785,14 @@ a {
   cursor: pointer;
   font-size: 1rem;
   color: var(--color-text-muted);
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+}
+
+.modal-close:hover {
+  background: rgba(30, 27, 75, 0.08);
+  color: var(--color-navy);
 }
 
 /* ── Admin ── */
@@ -648,7 +822,8 @@ a {
   overflow-x: auto;
   margin: 1.5rem 1rem;
   border: 1px solid var(--color-border);
-  border-radius: 10px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
 }
 
 table.admin-table {
@@ -672,6 +847,18 @@ table.admin-table td {
   border-top: 1px solid var(--color-border);
 }
 
+table.admin-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+table.admin-table tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+table.admin-table tbody tr:hover {
+  background: rgba(30, 27, 75, 0.05);
+}
+
 table.admin-table .row-actions {
   display: flex;
   gap: 0.5rem;
@@ -683,6 +870,7 @@ table.admin-table .row-actions {
   padding: 0.35rem 0.65rem;
   border-radius: 6px;
   cursor: pointer;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
 }
 
 .btn-edit {
@@ -691,10 +879,18 @@ table.admin-table .row-actions {
   color: var(--color-navy);
 }
 
+.btn-edit:hover {
+  background: rgba(30, 27, 75, 0.06);
+}
+
 .btn-delete {
   border: 1px solid #fecaca;
   background: #fff;
   color: #b91c1c;
+}
+
+.btn-delete:hover {
+  background: #fef2f2;
 }
 
 .login-wrap {

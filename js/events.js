@@ -49,9 +49,9 @@ function eventCardHtml(event) {
     "</div>" +
     '<p class="description">' + event.description + "</p>" +
     '<div class="event-meta">' +
-    "<div><strong>Date:</strong> <span>" + formatDate(event.date) + "</span></div>" +
-    "<div><strong>Time:</strong> <span>" + event.time + "</span></div>" +
-    "<div><strong>Venue:</strong> <span>" + event.venue + "</span></div>" +
+    '<div><span class="meta-icon" aria-hidden="true">📅</span> ' + formatDate(event.date) + "</div>" +
+    '<div><span class="meta-icon" aria-hidden="true">🕒</span> ' + event.time + "</div>" +
+    '<div><span class="meta-icon" aria-hidden="true">📍</span> ' + event.venue + "</div>" +
     "</div>" +
     '<button class="btn btn-navy register-btn" data-event-id="' + event.id + '">Register</button>' +
     "</article>"

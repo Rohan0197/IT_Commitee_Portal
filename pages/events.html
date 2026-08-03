@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Events | IIM Bodh Gaya IT Committee</title>
   <link rel="icon" href="../assets/logo-badge.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
@@ -41,7 +44,10 @@
     </div>
 
     <div class="filter-bar container">
-      <input type="search" id="searchInput" placeholder="Search events by name..." aria-label="Search events by name" />
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input type="search" id="searchInput" placeholder="Search events by name..." aria-label="Search events by name" />
+      </div>
       <select id="categoryFilter" aria-label="Filter events by category">
         <option value="All">All categories</option>
         <!-- options for EVENT_CATEGORIES are added by js/events.js -->

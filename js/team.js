@@ -13,9 +13,10 @@ function initials(name) {
 }
 
 function teamCardHtml(member) {
+  const gradient = "linear-gradient(135deg, " + member.colorFrom + ", " + member.colorTo + ")";
   return (
     '<article class="team-card">' +
-    '<div class="avatar" style="background:' + member.color + ';">' + initials(member.name) + "</div>" +
+    '<div class="avatar" style="background:' + gradient + ';">' + initials(member.name) + "</div>" +
     "<h3>" + member.name + "</h3>" +
     '<p class="role">' + member.role + "</p>" +
     '<p class="bio">' + member.bio + "</p>" +
