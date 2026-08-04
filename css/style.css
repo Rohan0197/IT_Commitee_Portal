@@ -1,9 +1,3 @@
-/* ============================================================
-   IIM Bodh Gaya IT Committee Portal — main stylesheet
-   All colors/spacing driven by CSS variables so the theme can be
-   changed in one place instead of hunting through every rule.
-   ============================================================ */
-
 :root {
   --color-navy: #1e1b4b;
   --color-navy-light: #2e2a6b;
@@ -42,7 +36,9 @@ a {
   color: inherit;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: var(--font-heading);
 }
 
@@ -51,7 +47,8 @@ h1, h2, h3 {
   color: var(--color-navy);
 }
 
-a, button {
+a,
+button {
   transition: all 0.15s ease;
 }
 
@@ -209,12 +206,15 @@ a:focus-visible {
   .nav-links {
     display: flex;
   }
+
   .nav-toggle {
     display: none;
   }
+
   .nav-mobile {
     display: none !important;
   }
+
   .brand .brand-iimbg-logo {
     display: block;
   }
@@ -271,7 +271,7 @@ a:focus-visible {
   pointer-events: none;
 }
 
-.hero > * {
+.hero>* {
   position: relative;
   z-index: 1;
 }
@@ -312,6 +312,7 @@ a:focus-visible {
   .hero h1 {
     font-size: 3rem;
   }
+
   .hero-buttons {
     flex-direction: row;
   }
@@ -535,6 +536,7 @@ a:focus-visible {
     grid-template-columns: repeat(3, 1fr);
     row-gap: 1.875rem;
   }
+
   .grid.grid-team {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -599,7 +601,7 @@ a:focus-visible {
   gap: 0.4rem;
 }
 
-.event-meta div + div {
+.event-meta div+div {
   margin-top: 0.3rem;
 }
 

@@ -1,8 +1,4 @@
-/* ============================================================
-   Logic for admin/index.html: shows one of four screens depending on
-   state (not configured / checking / login / dashboard), handles
-   sign in/out, and the add/edit/delete flow for events.
-   ============================================================ */
+
 
 const notConfiguredScreen = document.getElementById("notConfiguredScreen");
 const checkingScreen = document.getElementById("checkingScreen");
@@ -24,8 +20,6 @@ if (!isFirebaseConfigured) {
 } else {
   showScreen("checking");
 
-  // onAuthStateChanged fires once Firebase has checked browser storage
-  // for an existing login, and again any time sign-in/sign-out happens.
   auth.onAuthStateChanged(function (user) {
     if (user) {
       document.getElementById("signedInAs").textContent = "Signed in as " + user.email;
